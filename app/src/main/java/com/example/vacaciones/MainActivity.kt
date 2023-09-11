@@ -228,11 +228,8 @@ fun PantallaFormUI(
     actualizarUbicacionOnClick: () -> Unit = {}
 ) {
     val contexto = LocalContext.current
-    // Agrega un estado para el índice de la imagen seleccionada
     var imagenSeleccionadaIndex by remember { mutableStateOf(-1) }
-    // Agrega un estado para controlar si se muestra la imagen en pantalla completa
     var mostrarImagen by remember { mutableStateOf(false) }
-    // Agrega un estado para mantener la URI de la imagen seleccionada
     var imagenSeleccionadaUri by remember { mutableStateOf<Uri?>(null) }
 
     Column(
@@ -272,7 +269,7 @@ fun PantallaFormUI(
             Text("Tomar Fotografía")
         }
 
-        val columns = 3 // Ajusta el número de columnas según tus necesidades
+        val columns = 3
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -281,11 +278,9 @@ fun PantallaFormUI(
                     Box(
                         modifier = Modifier
                             .size(200.dp, 100.dp)
-                            .padding(8.dp) // Agrega un espacio alrededor de las fotos
+                            .padding(8.dp)
                             .clickable {
-                                // Al hacer clic en una foto, establece el índice de la imagen seleccionada
                                 imagenSeleccionadaIndex = index
-                                // Muestra la imagen en pantalla completa
                                 imagenSeleccionadaUri = uri
                                 mostrarImagen = true
                             }
@@ -303,7 +298,6 @@ fun PantallaFormUI(
         if (mostrarImagen && imagenSeleccionadaUri != null) {
             Dialog(
                 onDismissRequest = {
-                    // Cierra la pantalla de diálogo al hacer clic fuera de la imagen
                     mostrarImagen = false
                     imagenSeleccionadaUri = null
                 }
